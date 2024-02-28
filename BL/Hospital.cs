@@ -140,5 +140,44 @@ namespace BL
             }
             return diccionario;
         }
+
+
+        public static Dictionary<string, object> Update(ML.Hospital hospital)
+        {
+
+            Dictionary<string, object> diccionario = new Dictionary<string, object> { { "Hospital", hospital }, { "Excepcion", "" }, { "Resultado", false } };
+
+
+            try
+            {
+                //AQUI CAMBIA EL USING A DL
+                using (DL.CoteroHospitalContext context = new DL.CoteroHospitalContext())
+                {
+
+                    //AQUI CAMBIA LA SENTENCIA PARA LLAMAR AL STORE PROCEDURE
+                    var filasAfectadas = context.Database.ExecuteSqlRaw($"HospitalUpdate '{hospital.IdHospital}','{hospital.Nombre}', '{hospital.Direccion}','{hospital.AñoConstruccion}', '{hospital.Capacidad}','{hospital.Especialidad.IdEspecialidad}'");
+
+                    //Validar si las filas fueron afectadas
+                    if (filasAfectadas > 0)
+                    {
+                        diccionario["Resultado"] = true;
+                    }
+                    else
+                    {
+                        diccionario["Resultado"] = false;
+                    }
+                }
+            }
+            catch (Exception ex) //SI FALLÓ ALGO
+            {
+                diccionario["Resultado"] = false;
+                diccionario["Excepcion"] = ex.Message;
+
+            }
+            return diccionario;
+        }
+
+
+
     }
 }
