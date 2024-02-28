@@ -1,0 +1,187 @@
+﻿@model ML.Hospital
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Formulario de Hospitales <i class="fa-solid fa-circle-user" style="color: #00000;"></i></h2>
+
+<hr />
+@using (Html.BeginForm("Form", "Hospital", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{}
+
+
+
+
+@Html.DropDownListFor(model => model.Especialidad.IdEspecialidad, new SelectList(Model.Especialidad.Especialidades, "IdEspecialidad", "Especialidad"), "Especialidad", new { @class = "form-control" })
+
+
+
+
+
+
+@*    @Html.HiddenFor(model => model.IdUsuario)
+    @Html.HiddenFor(model => model.Imagen)*@
+
+@*    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.IdUsuario)
+            @Html.TextBoxFor(model => model.IdUsuario, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Rol.IdRol)
+            @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Tipo"), "Selecciona un Rol", new { @class = "form-control" })
+            <label id="lblRol" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.Rol.IdRol, "", new { @id = "lblRol", @style = "Color: red" })
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Nombre)
+            <div div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @onkeyup = "soloLetras(this,'lblNombre')" }) 
+            </div>
+                <label id="lblNombre" style="color:red"></label>
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @id = "lblNombre", @style = "Color: red" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.ApellidoPaterno)
+                <div div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @onkeyup = "soloLetras(this,'lblApellidoPaterno')" })
+               </div>
+
+                <label id="lblApellidoPaterno" style="color:red"></label>
+                @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @id = "lblApellidoPaterno", @style = "Color: red" })
+
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.ApellidoMaterno)
+                <div div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @onkeyup = "soloLetras(this,'lblApellidoMaterno')" })
+                </div>
+
+                <label id="lblApellidoMaterno" style="color:red"></label>
+                @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @id = "lblApellidoMaterno", @style = "Color: red" })
+            </div>
+            </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.FechaNacimiento)
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-calendar4-week"></i></span>
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "datepicker", @autocomplete = "false" })
+            </div>
+            <label id="lblFechaNacimiento" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @id = "lblApellidoPaterno", @style = "Color: red" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.CURP)
+            <div div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person-badge"></i> </span>
+                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control" })
+            </div>
+
+            <label id="lblCURP" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.CURP, "", new { @id = "lblCURP", @style = "Color: red" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Sexo)
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.Sexo, "M", new { @class = "form-check-input", @type = "radio" }) Masculino
+            </div>
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.Sexo, "F", new { @class = "form-check-input", @type = "radio" }) Femenino
+            </div>
+            <label id="lblSexo" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.Sexo, "", new { @id = "lblSexo", @style = "Color: red" })
+        </div>
+        </div>
+
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.UserName)
+            <div div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person-vcard"></i> </span>
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+            </div>
+
+            <label id="lblUserName" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @id = "lblUserName", @style = "Color: red" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Email)
+            <div div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-envelope-at-fill"></i> </span>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            </div>
+
+            <label id="lblEmail" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.Email, "", new { @id = "lblEmail", @style = "Color: red" })
+
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Password)
+            <div div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-passport"></i> </span>
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+            </div>
+
+            <label id="lblPassword" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.Password, "", new { @id = "lblPassword", @style = "Color: red" })
+
+        </div>
+        </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Celular)
+            <div div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-phone"></i> </span>
+                @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @onkeyup = "soloNumeros(this,'lblCelular')" })
+            </div>
+
+            <label id="lblCelular" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.Celular, "", new { @id = "lblCelular", @style = "Color: red" })
+
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Telefono)
+            <div div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-telephone"></i></span>
+                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @onkeyup = "soloNumeros(this,'lblTelefono')" })
+            </div>
+
+            <label id="lblTelefono" style="color:red"></label>
+            @Html.ValidationMessageFor(model => model.Telefono, "", new { @id = "lblTelefono", @style = "Color: red" })
+
+        </div>
+            <div class="col-md-4">
+                @Html.Label("Imagen")
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-image"></i></span>
+                    <input id="amd" type="file" class="form-control" onchange="validateFile(), readURL(this)" />
+                </div>
+                @if (Model.Imagen == null)
+                {
+                    <img id="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png" height="150" width="150" />
+
+                }
+                else
+                {
+                    <img src="data:image/*;base64,@Convert.ToBase64String(Model.Imagen)" height="150" width="150" />
+
+                }
+            </div>
+        </div>*@
+@*    <br>*@
